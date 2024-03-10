@@ -39,7 +39,17 @@ def main():
         # Encode the image for processing
         image = encode_image(img_path)
 
-        style = st.text_input("Set the style for the image (e.g. 'monet painting', 'disney pixar animation'):")
+        # Create selectbox
+        options = ["Disney pixar style", "Monet painting", "3D animation", "Cartoon style", "Van Gogh painting"] + ["Another style..."]
+        selection = st.selectbox("Select the desired filter style", options=options)
+
+        # Create text input for user entry
+        if selection == "Another style...": 
+            style = st.text_input("Enter your own style...")
+        else:
+            style = selection
+
+        # style = st.text_input("Set the style for the image (e.g. 'monet painting', 'disney pixar animation'):")
         if style:
             # Invoke language model for image description
             msg = llm1.invoke(
